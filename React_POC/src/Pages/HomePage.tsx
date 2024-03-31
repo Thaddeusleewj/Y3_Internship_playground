@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 
 // Importing firebase modules
@@ -55,6 +56,7 @@ interface WeatherApiObject {
 
 const Home = () => {
   // State variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [username, setUsername] = useState("");
   const [isOnline, setIsOnline] = useState(false);
   const [weather, setWeather] = useState<WeatherApiObject | null>(null);
