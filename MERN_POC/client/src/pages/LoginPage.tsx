@@ -59,18 +59,67 @@ const LoginPage = () => {
   // Login Method
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    // Log out login form values
-    console.log("Login Form Values:", loginForm);
-    // Perform login logic here
+
+    const { loginUsername, loginPassword } = loginForm;
+
+    const userData = {
+      email: loginUsername,
+      password: loginPassword,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      // Check if login was successful
+      if (response.ok) {
+        // Redirect to Home page
+        console.log("Login successful");
+        navigate("/home");
+      } else {
+        toast.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
   };
 
   // Signup Method
   const handleSignup = async (e: FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3000/api/user/register", signupForm);
-    const data = await response.json();
-    console.log(data);
+    const { username, email, password, confirmPassword } = signupForm;
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    const userData = {
+      username,
+      email,
+      password,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error signing up:", error);
+    }
   };
 
   return (

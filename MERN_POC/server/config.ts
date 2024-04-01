@@ -5,7 +5,7 @@ dotenv.config();
 
 const MongoConfig = () => {
   // Getting value of the URI
-  const mongoURI = process.env.MONGO_URI || "mongodb+srv://thaddeusleewj:z9N3Eif7Y5@pocdb.7nnimam.mongodb.net/?retryWrites=true&w=majority&appName=POCDB";
+  const mongoURI = process.env.MONGO_URI || "";
   mongoose
     .connect(mongoURI)
     .then(() => {
@@ -13,7 +13,7 @@ const MongoConfig = () => {
     })
     .catch((error) => {
       console.log("Error connecting to MongoDB", error);
-      console.log("URI: ", mongoURI)
+      console.log("URI: ", mongoURI);
     });
 };
 
